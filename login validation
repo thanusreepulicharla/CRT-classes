@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+// Custom Exception
+class InvalidLoginException extends Exception {
+    @Override
+    public String getMessage() {
+        return "Invalid username or password! Login failed.";
+    }
+}
+
+// Login Class
+class Login {
+
+    String validUser = "admin";
+    String validPass = "1234";
+
+    String username;
+    String password;
+
+    void acceptInput() {
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter Username: ");
+        username = s.nextLine();
+        System.out.print("Enter Password: ");
+        password = s.nextLine();
+    }
+
+    void verify() throws InvalidLoginException {
+        if (username.equals(validUser) && password.equals(validPass)) {
+            System.out.println("Login Successful!");
+        } else {
+            InvalidLoginException e = new InvalidLoginException();
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+}
+
+// Main Class
+public class LoginValidation {
+    public static void main(String[] args) {
+
+        Login login = new Login();
+
+        try {
+            login.acceptInput();
+            login.verify();
+        } catch (Exception e) {
+            System.out.println("Please try again.");
+        }
+    }
+}
+
+    
+
